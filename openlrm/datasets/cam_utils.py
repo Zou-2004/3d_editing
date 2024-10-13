@@ -150,9 +150,9 @@ def center_looking_at_camera_pose(
 
     z_axis = camera_position - look_at
     z_axis = z_axis / z_axis.norm(dim=-1, keepdim=True)
-    x_axis = torch.cross(up_world, z_axis)
+    x_axis = torch.linalg.cross(up_world, z_axis)
     x_axis = x_axis / x_axis.norm(dim=-1, keepdim=True)
-    y_axis = torch.cross(z_axis, x_axis)
+    y_axis = torch.linalg.cross(z_axis, x_axis)
     y_axis = y_axis / y_axis.norm(dim=-1, keepdim=True)
     extrinsics = torch.stack([x_axis, y_axis, z_axis, camera_position], dim=-1)
     return extrinsics
